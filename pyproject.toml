@@ -1,6 +1,6 @@
 [project]
 name = "physical2logical"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="Dragan Filipovic", email="info@frontenddot.com" },
   { name="Yuri Astrakhan", email="yuriastrakhan@gmail.com" }

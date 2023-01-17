@@ -1,7 +1,24 @@
 # physical2logical
 
-Convert CSS physical properties to logical
+Convert CSS physical properties to logical.
+
+Converts margins, padding, and borders to logical values, allowing RTL and vertical languages to show correctly.
+
+## Usage
 
 ```commandline
+css2logical [-h] [-r] [-a] [-f FILENAME] source
+
+Convert CSS physical properties to logical
+
+positional arguments:
+  source                Path to source directory / file.
+
+options:
+  -h, --help            show this help message and exit
+  -r, --recursive       Process all files from source directory.
+  -a, --analyze         Dry Run - Create a report with all changes (without actual source file changes).
+  -f FILENAME, --filename FILENAME
+                        Path to file where to save reports (used only with --analyze flag)
 
 ```

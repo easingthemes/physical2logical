@@ -20,7 +20,7 @@ from setuptools import setup
 setup(
     name='physical2logical',
 
-    version='1.0.0',
+    version='1.0.1',
 
     description='Convert CSS physical properties to logical',
     long_description='Converts margins, padding, and borders to logical values, allowing RTL and vertical languages '
