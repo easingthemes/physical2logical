@@ -9,15 +9,13 @@
 name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
 
 on:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
-
+    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-latest
 
     steps:
