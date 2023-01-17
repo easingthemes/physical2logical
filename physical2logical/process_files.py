@@ -1,10 +1,10 @@
 import re
 from os.path import relpath
 
-from config import replacer_reg, renamer_reg, aligner_reg, src_files_pattern
-from replacer import replacer
-from renamer import renamer
 from aligner import aligner
+from config import replacer_reg, renamer_reg, aligner_reg, src_files_pattern
+from renamer import renamer
+from replacer import replacer
 
 
 def process_file(source_file, result_file):
@@ -32,8 +32,8 @@ def process_results(file_path, source_file, result_file):
 
     if not changed:
         result_file.write("EMPTY_FILE\n")
-        
-    
+
+
 def process_files(root_path, is_recursive, result_file):
     if root_path.is_file():
         process_file(root_path, result_file)

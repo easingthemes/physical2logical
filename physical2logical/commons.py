@@ -1,4 +1,3 @@
-
 def collapse_if_equal(val1, val2):
     return val1 if val1 == val2 else f"{val1} {val2}"
 
