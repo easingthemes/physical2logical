@@ -15,6 +15,7 @@ version = {attr = "physical2logical.VERSION"}
 
 [tool.semantic_release]
 version_variable = "physical2logical/__init__.py:VERSION"
+version_source = "tag"
 branch = "main"
 
 [build-system]
