@@ -52,7 +52,7 @@ jobs:
           repository_password: ${{ secrets.PYPI_API_TOKEN }}
 
   deploy:
-    needs: release
+    needs: [config, release]
     name: Build and publish Python 🐍 distributions 📦 to TestPyPI
     runs-on: ${{ matrix.OS }}
     strategy:
