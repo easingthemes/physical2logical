@@ -14,7 +14,7 @@ license = {text = "Apache Software License"}
 version = {attr = "physical2logical.VERSION"}
 
 [tool.semantic_release]
-version_variable = "physical2logical.VERSION"
+version_variable = "physical2logical/__init__.py:VERSION"
 
 [build-system]
 build-backend = "setuptools.build_meta"
