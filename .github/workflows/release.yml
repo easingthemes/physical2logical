@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Test, Build and Release
+    name: Publish Python 🐍 distributions 📦 to PyPI
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -27,11 +27,6 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: |
           python -m build --sdist --wheel --outdir dist/
-      - name: Publish distribution 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
       - name: Python Semantic Release
         uses: relekang/python-semantic-release@master
         with:
