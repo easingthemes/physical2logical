@@ -13,6 +13,9 @@ license = {text = "Apache Software License"}
 [tool.setuptools.dynamic]
 version = {attr = "physical2logical.VERSION"}
 
+[tool.semantic_release]
+version_variable = "physical2logical.VERSION"
+
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]

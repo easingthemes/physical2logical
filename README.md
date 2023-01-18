@@ -22,3 +22,5 @@ options:
                         Path to file where to save reports (used only with --analyze flag). Default: 'report.html'
 
 ```
+
+Based on https://gist.github.com/nyurik/d438cb56a9059a0660ce4176ef94576f
