@@ -12,22 +12,22 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [ 16.x ]
+        python-version: [ 3.x ]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          node-version: ${{ matrix['node-version'] }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Build Library
-        run: npm run build --if-present
-      - name: Run Tests
-        run: npm test --if-present
-      - name: Release
+          python-version: ${{ matrix['python-version'] }}
+      - name: Install pypa/build
+        run: |
+          python -m pip install build --user
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+      - name: Create Git Release
         uses: cycjimmy/semantic-release-action@v3
         with:
           dry_run: false
@@ -36,9 +36,26 @@ jobs:
             @semantic-release/git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GIT_AUTHOR_NAME: github-actions
           GIT_AUTHOR_EMAIL: github-actions@github.com
           GIT_COMMITTER_NAME: github-actions
           GIT_COMMITTER_EMAIL: github-actions@github.com
           CI: true
+      - name: Update version
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          python prepare.py ${{ steps.semantic.outputs.new_release_version }}
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+      - name: Publish distribution 📦 to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+      - name: Python Semantic Release
+        uses: relekang/python-semantic-release@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository_username: __token__
+          repository_password: ${{ secrets.PYPI_API_TOKEN }}
