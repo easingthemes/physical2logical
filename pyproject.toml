@@ -10,9 +10,6 @@ authors = [
 keywords = ["css", "rtl", "logical", "physical", "scss"]
 license = {text = "Apache Software License"}
 
-name = "my_package"
-dynamic = ["version", "readme"]
-
 [tool.setuptools.dynamic]
 version = {attr = "physical2logical.VERSION"}
 
