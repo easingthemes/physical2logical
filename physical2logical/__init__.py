@@ -16,4 +16,4 @@
 
 
 name = "physical2logical"
-VERSION = "1.0.4"
+VERSION = "0.1.0"
