@@ -15,5 +15,23 @@
 # limitations under the License.
 
 
-name = 'physical2logical'
-VERSION = "1.0.3"
+from setuptools import setup
+
+setup(
+    name='physical2logical',
+
+    version='1.0.3',
+
+    description='Convert CSS physical properties to logical',
+    long_description='Converts margins, padding, and borders to logical values, allowing RTL and vertical languages '
+                     'to show correctly.',
+    long_description_content_type='text/x-rst',
+
+    author='Dragan Filipovic / Yuri Astrakhan',
+    author_email='info@frontenddot.com',
+
+    license='Apache Software License',
+
+    packages=['physical2logical'],
+    zip_safe=False,
+)
