@@ -12,13 +12,13 @@ css2logical [-h] [-r] [-a] [-f FILENAME] source
 Convert CSS physical properties to logical
 
 positional arguments:
-  source                Path to source directory / file. Default "."
+  source                Path to source directory / file. Default '.'
 
 options:
   -h, --help            show this help message and exit
-  -r, --recursive       Process all files from source directory. Default: false
-  -a, --analyze         Dry Run - Create a report with all changes (without actual source file changes). Default: false
+  -r, --recursive       Process all files from source directory. Default: True
+  -a, --analyze         Dry Run - Create a report with all changes (without actual source file changes). Default: True
   -f FILENAME, --filename FILENAME
-                        Path to file where to save reports (used only with --analyze flag). Default: report.html
+                        Path to file where to save reports (used only with --analyze flag). Default: 'report.html'
 
 ```
