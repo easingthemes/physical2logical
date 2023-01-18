@@ -15,5 +15,5 @@
 # limitations under the License.
 
 
-name = 'physical2logical'
+name = "physical2logical"
 VERSION = "1.0.4"
