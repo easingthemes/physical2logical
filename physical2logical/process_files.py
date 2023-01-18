@@ -35,11 +35,15 @@ def process_results(file_path, source_file, result_file):
 
 
 def process_files(root_path, is_recursive, result_file):
+    print(f"START processing files in '{root_path}'")
     if root_path.is_file():
         process_file(root_path, result_file)
     else:
         for pattern in src_files_pattern:
-            for file in (root_path.rglob(pattern) if is_recursive else root_path.glob(pattern)):
+            all_files_gen = root_path.rglob(pattern) if is_recursive else root_path.glob(pattern)
+            all_files_list = list(all_files_gen)
+            print(f"Found {len(all_files_list)} files for pattern {pattern}")
+            for file in all_files_list:
                 if file.is_file():
                     source_file = root_path / file
                     rel_path = relpath(file, root_path)
@@ -51,11 +55,14 @@ def process_files(root_path, is_recursive, result_file):
                         if changed:
                             print(f"Modifying {rel_path}")
                             source_file.write_text(changed)
+    print("DONE processing files.")
 
 
 def analyze_files(root_path, is_recursive, result_file):
+    print("Analyzing files")
     return process_files(root_path, is_recursive, result_file)
 
 
 def update_files(root_path, is_recursive):
+    print("Updating files")
     return process_files(root_path, is_recursive, None)

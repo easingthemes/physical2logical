@@ -1,24 +1,25 @@
 import argparse
 from pathlib import Path
-
 from analyze import analyze
 from process_files import update_files
 
 parser = argparse.ArgumentParser(description='Convert CSS physical properties to logical')
 parser.add_argument('source',
+                    nargs='*',
                     default='.',
-                    help='Path to source directory / file.')
+                    help='Path to source directory / file. Default "."')
 parser.add_argument('-r', '--recursive',
-                    default='None',
+                    default='True',
                     action='store_true',
-                    help='Process all files from source directory.')
+                    help='Process all files from source directory. Default: True')
 parser.add_argument('-a', '--analyze',
                     action='store_true',
-                    default='None',
-                    help='Dry Run - Create a report with all changes (without actual source file changes).')
+                    default='True',
+                    help='Dry Run - Create a report with all changes (without actual source file changes). '
+                         ' Default: True')
 parser.add_argument('-f', '--filename',
                     default='report.html',
-                    help='Path to file where to save reports (used only with -a/--analyze flag)')
+                    help='Path to file where to save reports (used only with -a/--analyze flag). Default: "report.html"')
 
 args = parser.parse_args()
 
