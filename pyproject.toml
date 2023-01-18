@@ -1,13 +1,25 @@
 [project]
 name = "physical2logical"
-version = "1.0.3"
+dynamic = ["version"]
+description = "Convert CSS physical properties to logical"
+readme = "README.md"
 authors = [
   { name="Dragan Filipovic", email="info@frontenddot.com" },
   { name="Yuri Astrakhan", email="yuriastrakhan@gmail.com" }
 ]
-description = "Convert CSS physical properties to logical"
-readme = "README.md"
+keywords = ["css", "rtl", "logical", "physical", "scss"]
+license = {text = "Apache Software License"}
+
+name = "my_package"
+dynamic = ["version", "readme"]
+
+[tool.setuptools.dynamic]
+version = {attr = "physical2logical.VERSION"}
 
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]
+
+[project.scripts]
+physical2logical = "physical2logical.cli"
+css2logical = "physical2logical.cli"
