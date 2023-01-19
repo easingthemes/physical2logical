@@ -1,4 +1,4 @@
-name: Manual Release - Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Manual Release
 on:
   workflow_dispatch:
     inputs:
@@ -17,15 +17,11 @@ on:
         default: true
 # ENV and Config
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-  GIT_AUTHOR_NAME: github-actions
-  GIT_AUTHOR_EMAIL: github-actions@github.com
-  GIT_COMMITTER_NAME: github-actions
-  GIT_COMMITTER_EMAIL: github-actions@github.com
-  CI: true
   CONFIG_PYTHON_VERSION: '["3.x"]'
   CONFIG_OS: '["ubuntu-latest"]'
+  COMMIT_MESSAGE_ENV: "Trigger Manual Release"
+  COMMIT_MESSAGE_MAJOR_ENV: "BREAKING CHANGE: Forced Major update without changes"
+
 # Main Job
 jobs:
   config:
@@ -33,27 +29,11 @@ jobs:
     outputs:
       PYTHON_VERSION: ${{ steps.set-config.outputs.CONFIG_PYTHON_VERSION }}
       OS: ${{ steps.set-config.outputs.CONFIG_OS }}
-      DRY_RUN: ${{ github.event.inputs.dryRun == 'true' }}
-      COMMIT_MESSAGE: ${{ steps.set-config.outputs.COMMIT_MESSAGE }}
     steps:
       - id: set-config
         run: |
           echo "CONFIG_PYTHON_VERSION=${{ toJSON(env.CONFIG_PYTHON_VERSION) }}" >> $GITHUB_OUTPUT
           echo "CONFIG_OS=${{ toJSON(env.CONFIG_OS) }}" >> $GITHUB_OUTPUT
-          if [[ github.event.inputs.dryRun == 'true' ]]; then
-            echo "DRY_RUN=--noop" >> "$GITHUB_ENV"
-          else
-            echo "DRY_RUN=''" >> "$GITHUB_ENV"
-          fi
-          if [[ github.event.inputs.version == 'major' ]]; then
-            echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
-            echo "${{ github.event.inputs.version }}: Trigger Manual Release" >> "$GITHUB_ENV"
-            echo "" >> "$GITHUB_ENV"
-            echo "BREAKING CHANGE: Trigger Manual Release" >> "$GITHUB_ENV"
-            echo "EOF" >> $GITHUB_ENV
-          else
-            echo "COMMIT_MESSAGE='${{ github.event.inputs.version }}: Trigger Manual Release'" >> "$GITHUB_ENV"
-          fi
   release-manual:
     name: Test, Build and force Release
     needs: config
@@ -69,22 +49,27 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Fetch tags
-        run: git fetch --tags
+#      - name: Fetch tags
+#        run: git fetch --tags
       - name: Set up Python ${{ matrix.PYTHON_VERSION }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.PYTHON_VERSION }}
       - name: Commit trigger
-        run: |
-          git commit --allow-empty -m "${{ fromJSON(needs.config.outputs.COMMIT_MESSAGE) }}"
+        run: >
+          export COMMIT_MESSAGE_PREFIX="${{ github.event.inputs.version == 'major' && 'ci' || github.event.inputs.version }}" &&
+          export COMMIT_MESSAGE="$COMMIT_MESSAGE_PREFIX: ${{ env.COMMIT_MESSAGE_ENV }}" &&
+          export COMMIT_MESSAGE_MAJOR="${{ github.event.inputs.version == 'major' && env.COMMIT_MESSAGE_MAJOR_ENV || '' }}" &&
+          git commit --allow-empty 
+          -m "$COMMIT_MESSAGE"
+          -m "$COMMIT_MESSAGE_MAJOR"
       - name: Create a release - ${{ github.event.inputs.version }}
         uses: relekang/python-semantic-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository_username: __token__
           repository_password: ${{ secrets.PYPI_API_TOKEN }}
-          additional_options: ${{ fromJSON(needs.config.outputs.DRY_RUN) }}
+          additional_options: "${{ github.event.inputs.dryRun == 'true' && '--noop' || '' }}"
 
   deploy:
     needs: [config, release-manual]
