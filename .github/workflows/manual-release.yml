@@ -1,4 +1,4 @@
-name: Manual Release
+name: Manual Release - Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
 on:
   workflow_dispatch:
     inputs:
