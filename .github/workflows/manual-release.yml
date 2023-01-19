@@ -76,14 +76,14 @@ jobs:
           python-version: ${{ matrix.PYTHON_VERSION }}
       - name: Commit trigger
         run: |
-          git commit --allow-empty -m "${{ env.COMMIT_MESSAGE }}"
+          git commit --allow-empty -m "${{ fromJSON(needs.config.outputs.COMMIT_MESSAGE) }}"
       - name: Create a release - ${{ github.event.inputs.version }}
         uses: relekang/python-semantic-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository_username: __token__
           repository_password: ${{ secrets.PYPI_API_TOKEN }}
-          additional_options: ${{ env.DRY_RUN }}
+          additional_options: ${{ fromJSON(needs.config.outputs.DRY_RUN) }}
 
   deploy:
     needs: [config, release-manual]
