@@ -10,6 +10,7 @@ on:
         options:
           - fix
           - feat
+          - major
       dryRun:
         description: 'DryRun'
         type: boolean
@@ -33,15 +34,24 @@ jobs:
       PYTHON_VERSION: ${{ steps.set-config.outputs.CONFIG_PYTHON_VERSION }}
       OS: ${{ steps.set-config.outputs.CONFIG_OS }}
       DRY_RUN: ${{ github.event.inputs.dryRun == 'true' }}
+      COMMIT_MESSAGE: ${{ steps.set-config.outputs.COMMIT_MESSAGE }}
     steps:
       - id: set-config
         run: |
           echo "CONFIG_PYTHON_VERSION=${{ toJSON(env.CONFIG_PYTHON_VERSION) }}" >> $GITHUB_OUTPUT
           echo "CONFIG_OS=${{ toJSON(env.CONFIG_OS) }}" >> $GITHUB_OUTPUT
           if [[ github.event.inputs.dryRun == 'true' ]]; then
-               echo "DRY_RUN=--noop" >> "$GITHUB_ENV"
+            echo "DRY_RUN=--noop" >> "$GITHUB_ENV"
           else
-              echo "DRY_RUN=''" >> "$GITHUB_ENV"
+            echo "DRY_RUN=''" >> "$GITHUB_ENV"
+          fi
+          if [[ github.event.inputs.version == 'major' ]]; then
+            echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
+            echo "${{ github.event.inputs.version }}: Trigger Manual Release" >> "$GITHUB_ENV"
+            echo "BREAKING CHANGE: Trigger Manual Release" >> "$GITHUB_ENV"
+            echo "EOF" >> $GITHUB_ENV
+          else
+            echo "COMMIT_MESSAGE='${{ github.event.inputs.version }}: Trigger Manual Release'" >> "$GITHUB_ENV"
           fi
   release-manual:
     name: Test, Build and force Release
@@ -64,7 +74,7 @@ jobs:
           python-version: ${{ matrix.PYTHON_VERSION }}
       - name: Commit trigger
         run: |
-          git commit --allow-empty -m "${{ github.event.inputs.version }}: Trigger Manual Release"
+          git commit --allow-empty -m "${{ env.COMMIT_MESSAGE }}"
       - name: Create a release - ${{ github.event.inputs.version }}
         uses: relekang/python-semantic-release@master
         with:
