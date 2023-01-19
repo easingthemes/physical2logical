@@ -48,6 +48,7 @@ jobs:
           if [[ github.event.inputs.version == 'major' ]]; then
             echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
             echo "${{ github.event.inputs.version }}: Trigger Manual Release" >> "$GITHUB_ENV"
+            echo "" >> "$GITHUB_ENV"
             echo "BREAKING CHANGE: Trigger Manual Release" >> "$GITHUB_ENV"
             echo "EOF" >> $GITHUB_ENV
           else
