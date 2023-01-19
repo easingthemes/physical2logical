@@ -1,4 +1,4 @@
-name: Semantic Release
+name: Release on TestPyPI
 
 on:
   push:
@@ -26,9 +26,10 @@ jobs:
         run: |
           echo "CONFIG_PYTHON_VERSION=${{ toJSON(env.CONFIG_PYTHON_VERSION) }}" >> $GITHUB_OUTPUT
           echo "CONFIG_OS=${{ toJSON(env.CONFIG_OS) }}" >> $GITHUB_OUTPUT
-  release:
-    name: Publish Python 🐍 distributions 📦 to PyPI
-    needs: config
+
+  deploy:
+    needs: [config]
+    name: Build and publish Python 🐍 distributions 📦 to TestPyPI
     runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
@@ -38,15 +39,18 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Set up Python ${{ matrix.PYTHON_VERSION }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.PYTHON_VERSION }}
-      - name: Python Semantic Release
-        uses: relekang/python-semantic-release@master
+      - name: Install pypa/build
+        run: |
+          python -m pip install build --user
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+      - name: Publish distribution 📦 to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository_username: __token__
-          repository_password: ${{ secrets.PYPI_API_TOKEN }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
