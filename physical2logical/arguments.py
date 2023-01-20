@@ -43,7 +43,7 @@ def get_args():
     parser.add_argument('-f', '--filename',
                         default='report.html',
                         help='Path to file where to save reports (used only with -a/--analyze flag).'
-                             ' (default: "report.html")')
+                             ' (default: "./report.html")')
 
     if len(sys.argv) < 2:
         return log_and_exit(f"Path to source directory or one file is required", parser)
@@ -51,7 +51,7 @@ def get_args():
     args = parser.parse_args()
 
     root_path = Path(args.source)
-    result_file = args.filename or "report.html"
+    result_file = args.filename or "./report.html"
     is_recursive = args.recursive
     is_analyze = args.analyze
     is_update = args.update
