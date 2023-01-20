@@ -8,7 +8,6 @@ from physical2logical.config import Logger
 def get_args():
     parser = argparse.ArgumentParser(description='Convert CSS physical properties to logical')
     parser.add_argument('source',
-                        nargs='*',
                         help='Path to source directory or one file. Required')
     parser.add_argument('-r', '--recursive',
                         default='True',
