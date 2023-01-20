@@ -7,10 +7,10 @@ from pathlib import Path
 from physical2logical.logger import logger
 
 
-def log_and_exit(msg, parser):
+def log_and_exit(msg, callback):
     logger.error(f"{msg}")
     logger.empty()
-    parser.print_help()
+    callback()
     sys.exit(1)
 
 
@@ -56,22 +56,28 @@ def get_args():
     is_analyze = args.analyze
     is_update = args.update
 
+    def print_args():
+        logger.info_(f"Params: \n"
+                     f"\tsource: {root_path}\n"
+                     f"\trecursive: {is_recursive}\n"
+                     f"\tupdate: {is_update}\n"
+                     f"\tanalyze: {is_analyze}\n"
+                     f"\tresults file: {result_file}")
+        logger.empty()
+
+    def callback():
+        print_args()
+        parser.print_help()
+
     if not is_analyze and not is_update:
-        return log_and_exit("Action missing: [-a | --analyze] or [-u | --update]", parser)
+        return log_and_exit("Action missing: [-a | --analyze] or [-u | --update]", callback)
 
     if not args.filename:
         logger.warning(f"Report filename not defined,using default '{result_file}'")
         logger.empty()
 
-    if not is_valid_file_path(result_file):
-        return log_and_exit("Filename must be valid file path", parser)
-
-    logger.info_(f"Params: \n"
-                 f"\tsource: {root_path}\n"
-                 f"\trecursive: {is_recursive}\n"
-                 f"\tupdate: {is_update}\n"
-                 f"\tanalyze: {is_analyze}\n"
-                 f"\tresults file: {result_file}")
-    logger.empty()
+    is_valid_result_file = is_valid_file_path(result_file)
+    if not is_valid_result_file:
+        return log_and_exit(f"Filename must be valid file path. Received: {result_file}", callback)
 
     return is_analyze, is_update, is_recursive, root_path, result_file
