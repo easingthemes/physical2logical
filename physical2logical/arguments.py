@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 from os.path import isfile
 from pathlib import Path
@@ -13,6 +14,16 @@ def log_and_exit(msg, parser):
     sys.exit(1)
 
 
+def is_valid_file_path(file_path):
+    if os.path.exists(file_path):
+        return True
+    elif os.access(os.path.dirname(file_path), os.W_OK):
+        return True
+    else:
+        return False
+
+
+# can not write there
 def get_args():
     parser = argparse.ArgumentParser(description='Convert CSS physical properties to logical')
     parser.add_argument('source',
@@ -52,7 +63,7 @@ def get_args():
         logger.warning(f"Report filename not defined,using default '{result_file}'")
         logger.empty()
 
-    if not isfile(result_file):
+    if not is_valid_file_path(result_file):
         return log_and_exit("Filename must be valid file path", parser)
 
     logger.info_(f"Params: \n"
