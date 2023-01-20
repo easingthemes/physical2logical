@@ -4,10 +4,16 @@ Convert CSS physical properties to logical.
 
 Converts margins, padding, and borders to logical values, allowing RTL and vertical languages to show correctly.
 
+## Install
+
+```commandline
+pip install physical2logical
+```
+
 ## Usage
 
 ```commandline
-usage: physical2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME] source
+usage: css2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME] source
 
 Convert CSS physical properties to logical
 
