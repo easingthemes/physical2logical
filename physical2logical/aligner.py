@@ -1,5 +1,5 @@
-from commons import update_file
-from config import aligns
+from physical2logical.commons import update_file
+from physical2logical.config import aligns
 
 
 def aligner(match, result_file=None):
