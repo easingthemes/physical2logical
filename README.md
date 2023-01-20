@@ -7,19 +7,23 @@ Converts margins, padding, and borders to logical values, allowing RTL and verti
 ## Usage
 
 ```commandline
-css2logical [-h] [-r] [-a] [-f FILENAME] source
+usage: physical2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME] source
 
 Convert CSS physical properties to logical
 
 positional arguments:
-  source                Path to source directory / file. Default '.'
+  source                Path to source directory or one file. Required
 
-options:
+optional arguments:
   -h, --help            show this help message and exit
-  -r, --recursive       Process all files from source directory. Default: True
-  -a, --analyze         Dry Run - Create a report with all changes (without actual source file changes). Default: True
+  -r, --recursive, --no-recursive
+                        Recursive process of all files from source directory. (default: True)
+  -u, --update, --no-update
+                        Update files. (default: False)
+  -a, --analyze, --no-analyze
+                        Dry Run - Create a report with all changes (without actual source file changes). (default: False)
   -f FILENAME, --filename FILENAME
-                        Path to file where to save reports (used only with --analyze flag). Default: 'report.html'
+                        Path to file where to save reports (used only with -a/--analyze flag). (default: "report.html")
 
 ```
 
