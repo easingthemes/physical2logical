@@ -1,4 +1,4 @@
-from process_files import analyze_files
+from physical2logical.process_files import analyze_files
 
 
 def analyze(root_path, is_recursive, result_file):

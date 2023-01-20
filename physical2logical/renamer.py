@@ -1,5 +1,5 @@
-from commons import update_file
-from config import renames
+from physical2logical.commons import update_file
+from physical2logical.config import renames
 
 
 def renamer(match, result_file=None):

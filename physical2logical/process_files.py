@@ -1,10 +1,10 @@
 import re
 from os.path import relpath
 
-from aligner import aligner
-from config import replacer_reg, renamer_reg, aligner_reg, src_files_pattern
-from renamer import renamer
-from replacer import replacer
+from physical2logical.aligner import aligner
+from physical2logical.config import replacer_reg, renamer_reg, aligner_reg, src_files_pattern
+from physical2logical.renamer import renamer
+from physical2logical.replacer import replacer
 
 
 def process_file(source_file, result_file):

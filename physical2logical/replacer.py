@@ -1,6 +1,6 @@
-from commons import update_file
-from config import sides
-from tokenize_values import tokenize_values
+from physical2logical.commons import update_file
+from physical2logical.config import sides
+from physical2logical.tokenize_values import tokenize_values
 
 
 def replacer(match, result_file=None):
