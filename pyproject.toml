@@ -11,10 +11,10 @@ keywords = ["css", "rtl", "logical", "physical", "scss"]
 license = {text = "Apache Software License"}
 
 [tool.setuptools.dynamic]
-version = {attr = "physical2logical.VERSION"}
+version = {attr = "physical2logical.__VERSION__"}
 
 [tool.semantic_release]
-version_variable = "physical2logical/__init__.py:VERSION"
+version_variable = "physical2logical/__init__.py:__VERSION__"
 version_source = "tag"
 branch = "main"
 

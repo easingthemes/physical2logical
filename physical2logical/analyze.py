@@ -1,3 +1,4 @@
+from physical2logical.logger import logger
 from physical2logical.process_files import analyze_files
 
 
@@ -35,3 +36,5 @@ def analyze(root_path, is_recursive, result_file):
         with open(result_file, 'w') as out:
             out.write(code_updated)
             out.close()
+
+        logger.info_(f"Results file: {result_file}")

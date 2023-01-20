@@ -39,13 +39,12 @@ aligner_reg = r'^( *)(text-align|float|clear)( *: *)(left|right)( *);'
 src_files_pattern = ('*.scss', '*.css')
 
 
-class Logger:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OK = '\033[92m'
-    WARNING = '\033[93m WARNING: '
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
+class Style:
+    DEBUG = "\033[90m"
+    HIGHLIGHT = '\033[94m'
+    SUCCESS = '\033[92m'
+    WARNING = '\033[93m'
+    ERROR = '\033[91m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    ENDC = '\033[0m'
