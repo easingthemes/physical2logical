@@ -8,3 +8,4 @@ def update_file(result_file, original, replaced):
 
     result = f"<tr><td> {original.lstrip()} </td><td> {replaced.lstrip()} </td></tr>\n"
     result_file.write(result)
+
