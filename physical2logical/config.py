@@ -37,3 +37,15 @@ replacer_reg = r'^( *)(margin|padding|border)(-(?:left|right|top|bottom))?(-(?:s
 renamer_reg = r'^( *)(' + '|'.join(renames.keys()) + r')( *: *)([^;\n]+);( *//.*)?$'
 aligner_reg = r'^( *)(text-align|float|clear)( *: *)(left|right)( *);'
 src_files_pattern = ('*.scss', '*.css')
+
+
+class Logger:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OK = '\033[92m'
+    WARNING = '\033[93m WARNING: '
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
