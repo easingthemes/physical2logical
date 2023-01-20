@@ -41,7 +41,7 @@ def get_args():
                         default=False,
                         help='Dry Run - Create a report with all changes (without actual source file changes).')
     parser.add_argument('-f', '--filename',
-                        default='report.html',
+                        default='./report.html',
                         help='Path to file where to save reports (used only with -a/--analyze flag).'
                              ' (default: "./report.html")')
 
