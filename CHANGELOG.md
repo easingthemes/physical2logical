@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.3.1 (2023-01-21)
+### Fix
+* Fix default pattern list ([`deaeb5d`](https://github.com/easingthemes/physical2logical/commit/deaeb5df60e8b43843216a456eb9a1baf83f5e97))
+
 ## v2.3.0 (2023-01-21)
 ### Feature
 * Add pattern as argument ([`be3a007`](https://github.com/easingthemes/physical2logical/commit/be3a0074815bdc79d7af45c2793628b3509ee595))
