@@ -49,7 +49,7 @@ def get_args():
                         help='Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40'
                              ' (default: 20)')
     parser.add_argument('-p', '--pattern',
-                        default="'*.scss', '*.css'",
+                        default="*.scss, *.css",
                         help="Comma separated list of glob patterns"
                              " (default: '*.scss, *.css')")
 
