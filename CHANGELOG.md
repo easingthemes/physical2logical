@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.2.7 (2023-01-21)
+### Fix
+* Add report example image ([`95f12ef`](https://github.com/easingthemes/physical2logical/commit/95f12efcb34040f3e23c4adf1051ae4edc0ffcb4))
+
 ## v2.2.6 (2023-01-20)
 ### Fix
 * Add relative default report file path ([`3970f5e`](https://github.com/easingthemes/physical2logical/commit/3970f5e4e292185b0a4988278c62a812b189ca5c))
