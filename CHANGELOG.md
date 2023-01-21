@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.2.8 (2023-01-21)
+### Fix
+* Add debug logs ([`fb37649`](https://github.com/easingthemes/physical2logical/commit/fb376495723765c0172cc65c1d85fc3351d96006))
+
 ## v2.2.7 (2023-01-21)
 ### Fix
 * Add report example image ([`95f12ef`](https://github.com/easingthemes/physical2logical/commit/95f12efcb34040f3e23c4adf1051ae4edc0ffcb4))
