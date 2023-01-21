@@ -13,7 +13,7 @@ pip install physical2logical
 ## Usage
 
 ```commandline
-usage: css2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME] source
+usage: css2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME]  [-l LOG] source
 
 Convert CSS physical properties to logical
 
@@ -29,7 +29,9 @@ optional arguments:
   -a, --analyze, --no-analyze
                         Dry Run - Create a report with all changes (without actual source file changes). (default: False)
   -f FILENAME, --filename FILENAME
-                        Path to file where to save reports (used only with -a/--analyze flag). (default: "report.html")
+                        Path to file where to save reports (used only with -a | --analyze flag). (default: "./report.html")
+  -l LOG, --log LOG     Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40 (default: 0)
+
 
 ```
 
