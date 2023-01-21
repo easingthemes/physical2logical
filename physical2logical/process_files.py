@@ -2,7 +2,7 @@ import re
 from os.path import relpath
 
 from physical2logical.aligner import aligner
-from physical2logical.config import replacer_reg, renamer_reg, aligner_reg, src_files_pattern
+from physical2logical.config import replacer_reg, renamer_reg, aligner_reg, default_files_pattern
 from physical2logical.logger import logger
 from physical2logical.renamer import renamer
 from physical2logical.replacer import replacer
@@ -37,12 +37,14 @@ def process_results(file_path, source_file, result_file):
         logger.debug(f"File changed {source_file}")
 
 
-def process_files(root_path, is_recursive, result_file):
+def process_files(root_path, is_recursive, result_file, glob_pattern):
     logger.info(f"START processing files in '{root_path}'")
+    files_pattern = glob_pattern.split(",") if glob_pattern else default_files_pattern
+
     if root_path.is_file():
         process_file(root_path, result_file)
     else:
-        for pattern in src_files_pattern:
+        for pattern in files_pattern:
             all_files_gen = root_path.rglob(pattern) if is_recursive else root_path.glob(pattern)
             all_files_list = list(all_files_gen)
             logger.info(f"Found {len(all_files_list)} files for pattern {pattern}")
@@ -61,11 +63,11 @@ def process_files(root_path, is_recursive, result_file):
     logger.info_("DONE processing files.")
 
 
-def analyze_files(root_path, is_recursive, result_file):
+def analyze_files(root_path, is_recursive, result_file, pattern):
     logger.info_(f"Analyzing files in {root_path} ...")
-    return process_files(root_path, is_recursive, result_file)
+    return process_files(root_path, is_recursive, result_file, pattern)
 
 
-def update_files(root_path, is_recursive):
+def update_files(root_path, is_recursive, pattern):
     logger.info_(f"Updating files  in {root_path} ...")
-    return process_files(root_path, is_recursive, None)
+    return process_files(root_path, is_recursive, None, pattern)
