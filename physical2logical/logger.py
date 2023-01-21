@@ -65,7 +65,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-def create_logger(log_level=0):
+def create_logger(log_level=20):
     __logger = logging.Logger(__name__)
     __logger.setLevel(log_level)
 
