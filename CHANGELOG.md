@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.2.12 (2023-01-21)
+### Fix
+* Add log level to Readme ([`eb646bc`](https://github.com/easingthemes/physical2logical/commit/eb646bc05db7a87d4b674ebd5e7c714589be71bb))
+
 ## v2.2.11 (2023-01-21)
 ### Fix
 * Change default log level ([`a0c6d23`](https://github.com/easingthemes/physical2logical/commit/a0c6d23b99516fd08505593fb6577296d5de020f))
