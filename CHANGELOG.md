@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.3.0 (2023-01-21)
+### Feature
+* Add pattern as argument ([`be3a007`](https://github.com/easingthemes/physical2logical/commit/be3a0074815bdc79d7af45c2793628b3509ee595))
+
 ## v2.2.12 (2023-01-21)
 ### Fix
 * Add log level to Readme ([`eb646bc`](https://github.com/easingthemes/physical2logical/commit/eb646bc05db7a87d4b674ebd5e7c714589be71bb))
