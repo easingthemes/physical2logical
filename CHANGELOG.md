@@ -1,5 +1,10 @@
 <!--next-version-placeholder-->
 
+## v2.2.11 (2023-01-21)
+### Fix
+* Change default log level ([`a0c6d23`](https://github.com/easingthemes/physical2logical/commit/a0c6d23b99516fd08505593fb6577296d5de020f))
+* Change default log level ([`a6a55eb`](https://github.com/easingthemes/physical2logical/commit/a6a55eb8f9abb7c4010559c093569be1350bf2bc))
+
 ## v2.2.10 (2023-01-21)
 ### Fix
 * Add log level as a param ([`1590426`](https://github.com/easingthemes/physical2logical/commit/159042693a3b3861757a0decada5174974765e95))
