@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v2.2.10 (2023-01-21)
+### Fix
+* Add log level as a param ([`1590426`](https://github.com/easingthemes/physical2logical/commit/159042693a3b3861757a0decada5174974765e95))
+
 ## v2.2.9 (2023-01-21)
 ### Fix
 * Add more debug logs ([`3c9d829`](https://github.com/easingthemes/physical2logical/commit/3c9d829fd65b9482dadbc3c8945118421a6c76c4))
