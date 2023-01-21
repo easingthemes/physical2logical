@@ -48,7 +48,7 @@ def process_files(root_path, is_recursive, result_file):
                 if file.is_file():
                     source_file = root_path / file
                     rel_path = relpath(file, root_path)
-
+                    logger.debug(f"Use {source_file}")
                     if result_file:
                         process_results(rel_path, source_file, result_file)
                     else:
