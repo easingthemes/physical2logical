@@ -1,7 +1,6 @@
 import argparse
 import os
 import sys
-from os.path import isfile
 from pathlib import Path
 
 from physical2logical.logger import logger
@@ -44,6 +43,11 @@ def get_args():
                         default='./report.html',
                         help='Path to file where to save reports (used only with -a/--analyze flag).'
                              ' (default: "./report.html")')
+    parser.add_argument('-l', '--log',
+                        default=0,
+                        type=int,
+                        help='Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40'
+                             ' (default: 0)')
 
     if len(sys.argv) < 2:
         return log_and_exit(f"Path to source directory or one file is required", parser)
@@ -55,6 +59,9 @@ def get_args():
     is_recursive = args.recursive
     is_analyze = args.analyze
     is_update = args.update
+    log_level = args.log
+
+    logger.setLevel(log_level)
 
     def print_args():
         logger.info_(f"Params: \n"
