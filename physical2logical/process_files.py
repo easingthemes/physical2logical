@@ -21,7 +21,6 @@ def process_file(source_file, result_file):
 
     if res != code:
         return res
-
     return ""
 
 
@@ -32,7 +31,10 @@ def process_results(file_path, source_file, result_file):
     changed = process_file(source_file, result_file)
 
     if not changed:
+        logger.debug(f"File not changed, {source_file}")
         result_file.write("EMPTY_FILE\n")
+    else:
+        logger.debug(f"File changed {source_file}")
 
 
 def process_files(root_path, is_recursive, result_file):
@@ -46,25 +48,24 @@ def process_files(root_path, is_recursive, result_file):
             logger.info(f"Found {len(all_files_list)} files for pattern {pattern}")
             for file in all_files_list:
                 if file.is_file():
-                    source_file = root_path / file
                     rel_path = relpath(file, root_path)
-                    logger.debug(f"Use {source_file}")
+                    logger.debug(f"Use {file}")
                     if result_file:
-                        process_results(rel_path, source_file, result_file)
+                        process_results(rel_path, file, result_file)
                     else:
-                        changed = process_file(source_file, None)
+                        changed = process_file(file, None)
                         if changed:
                             logger.info(f"Modifying {rel_path}")
-                            source_file.write_text(changed)
+                            file.write_text(changed)
 
     logger.info_("DONE processing files.")
 
 
 def analyze_files(root_path, is_recursive, result_file):
-    logger.info_("Analyzing files ...")
+    logger.info_(f"Analyzing files in {root_path} ...")
     return process_files(root_path, is_recursive, result_file)
 
 
 def update_files(root_path, is_recursive):
-    logger.info_("Updating files ...")
+    logger.info_(f"Updating files  in {root_path} ...")
     return process_files(root_path, is_recursive, None)

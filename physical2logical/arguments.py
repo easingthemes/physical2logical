@@ -80,4 +80,6 @@ def get_args():
     if not is_valid_result_file:
         return log_and_exit(f"Filename must be valid file path. Received: {result_file}", callback)
 
+    print_args()
+
     return is_analyze, is_update, is_recursive, root_path, result_file
