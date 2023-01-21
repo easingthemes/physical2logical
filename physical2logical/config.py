@@ -36,7 +36,7 @@ aligns = {
 replacer_reg = r'^( *)(margin|padding|border)(-(?:left|right|top|bottom))?(-(?:size|style|color))?( *: *)([^;\n]+);( *//.*)?$'
 renamer_reg = r'^( *)(' + '|'.join(renames.keys()) + r')( *: *)([^;\n]+);( *//.*)?$'
 aligner_reg = r'^( *)(text-align|float|clear)( *: *)(left|right)( *);'
-src_files_pattern = ('*.scss', '*.css')
+default_files_pattern = ('*.scss', '*.css')
 
 
 class Style:

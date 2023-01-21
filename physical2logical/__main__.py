@@ -4,10 +4,10 @@ from physical2logical.process_files import update_files
 
 
 def cli():
-    is_analyze, is_update, is_recursive, root_path, result_file = get_args()
+    is_analyze, is_update, is_recursive, root_path, result_file, pattern = get_args()
 
     if is_analyze:
-        analyze(root_path, is_recursive, result_file)
+        analyze(root_path, is_recursive, result_file, pattern)
 
     if is_update:
-        update_files(root_path, is_recursive)
+        update_files(root_path, is_recursive, pattern)

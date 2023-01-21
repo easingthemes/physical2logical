@@ -2,7 +2,7 @@ from physical2logical.logger import logger
 from physical2logical.process_files import analyze_files
 
 
-def analyze(root_path, is_recursive, result_file):
+def analyze(root_path, is_recursive, result_file, pattern):
     f = open(result_file, "a+")
     f.truncate(0)
 
@@ -11,7 +11,7 @@ def analyze(root_path, is_recursive, result_file):
     header += "</thead><tbody>\n"
     f.write(header)
 
-    analyze_files(root_path, is_recursive, f)
+    analyze_files(root_path, is_recursive, f, pattern)
 
     footer = "</tbody></table>\n"
     f.write(footer)

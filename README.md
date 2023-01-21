@@ -13,7 +13,7 @@ pip install physical2logical
 ## Usage
 
 ```commandline
-usage: css2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME]  [-l LOG] source
+usage: css2logical [-h] [-r | --recursive | --no-recursive] [-u | --update | --no-update] [-a | --analyze | --no-analyze] [-f FILENAME]  [-l LOG] [-p PATTERN] source
 
 Convert CSS physical properties to logical
 
@@ -31,6 +31,8 @@ optional arguments:
   -f FILENAME, --filename FILENAME
                         Path to file where to save reports (used only with -a | --analyze flag). (default: "./report.html")
   -l LOG, --log LOG     Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40 (default: 0)
+  -p PATTERN, --pattern PATTERN
+                        Comma separated list of glob patterns (default: '*.scss, *.css')
 
 
 ```
@@ -41,7 +43,12 @@ Based on https://gist.github.com/nyurik/d438cb56a9059a0660ce4176ef94576f
 
 ![report.png](report.png)
 
-## Example changes
+## Example
 
+```commandline
+css2logical -u ./src/scss/
+```
+
+![logs.png](logs.png)
 
 ![physical2logical-all-files.png](physical2logical-all-files.png)

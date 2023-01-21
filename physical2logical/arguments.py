@@ -48,6 +48,10 @@ def get_args():
                         type=int,
                         help='Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40'
                              ' (default: 20)')
+    parser.add_argument('-p', '--pattern',
+                        default="'*.scss', '*.css'",
+                        help="Comma separated list of glob patterns"
+                             " (default: '*.scss, *.css')")
 
     if len(sys.argv) < 2:
         return log_and_exit(f"Path to source directory or one file is required", parser)
@@ -60,16 +64,19 @@ def get_args():
     is_analyze = args.analyze
     is_update = args.update
     log_level = args.log
+    pattern = args.pattern
 
     logger.setLevel(log_level)
 
     def print_args():
         logger.info_(f"Params: \n"
                      f"\tsource: {root_path}\n"
+                     f"\tpattern: {pattern}\n"
                      f"\trecursive: {is_recursive}\n"
                      f"\tupdate: {is_update}\n"
                      f"\tanalyze: {is_analyze}\n"
-                     f"\tresults file: {result_file}")
+                     f"\tresults file: {result_file}"
+                     f"\tlog level: {log_level}")
         logger.empty()
 
     def callback():
@@ -89,4 +96,4 @@ def get_args():
 
     print_args()
 
-    return is_analyze, is_update, is_recursive, root_path, result_file
+    return is_analyze, is_update, is_recursive, root_path, result_file, pattern
