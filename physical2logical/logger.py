@@ -67,7 +67,7 @@ class CustomFormatter(logging.Formatter):
 
 def create_logger():
     __logger = logging.Logger(__name__)
-    __logger.setLevel(logging.DEBUG)
+    __logger.setLevel(0)
 
     ch = logging.StreamHandler()
     ch.setFormatter(CustomFormatter())
