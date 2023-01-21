@@ -44,10 +44,10 @@ def get_args():
                         help='Path to file where to save reports (used only with -a/--analyze flag).'
                              ' (default: "./report.html")')
     parser.add_argument('-l', '--log',
-                        default=0,
+                        default=20,
                         type=int,
                         help='Log Level: All: 0, Debug: 10, Info: 20, Warning: 30, Error: 40'
-                             ' (default: 0)')
+                             ' (default: 20)')
 
     if len(sys.argv) < 2:
         return log_and_exit(f"Path to source directory or one file is required", parser)
